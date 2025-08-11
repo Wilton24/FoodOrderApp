@@ -1,6 +1,5 @@
-import Menu from "./components/Menus";
 import Header from "./components/Header";
-import Meals from "./components/Meals";
+import Menu from "./components/Menu";
 import { useEffect, useState } from "react";
 import { getAllMenu } from './services/api'
 
@@ -8,15 +7,18 @@ function App() {
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    const allMeals = getAllMenu();
-    setMenu(allMeals);
+    async function fetchMenu() {
+      const allMeals = await getAllMenu();
+      setMenu(allMeals);
+    }
+    fetchMenu();
   }, []);
 
 
   return (
     <>
       <Header />
-      <Meals
+      <Menu
         menu={menu} />
     </>
   );
