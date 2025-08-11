@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { CartContext } from '../store/cartStore'; // named import
 import logo from "../../public/logo.jpg";
+import Button from "./common/Button";
 
 export default function Header() {
+    const { cartItem } = useContext(CartContext);
+
     return (
         <header id="main-header">
             <div className="left-header" id="title">
@@ -8,8 +13,8 @@ export default function Header() {
                 <h1>Logo</h1>
             </div>
             <div className="right-header">
-                <h1>cart(3)</h1>
+                <Button textOnly>cart({cartItem.length})</Button>
             </div>
         </header>
-    )
+    );
 }
