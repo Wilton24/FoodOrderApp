@@ -1,9 +1,23 @@
+import Menu from "./components/Menus";
+import Header from "./components/Header";
+import Meals from "./components/Meals";
+import { useEffect, useState } from "react";
+import { getAllMenu } from './services/api'
+
 function App() {
+  const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    const allMeals = getAllMenu();
+    setMenu(allMeals);
+  }, []);
+
+
   return (
     <>
-      <h1>You got this 💪</h1>
-      <p>Stuck? Not sure how to proceed?</p>
-      <p>Don't worry - we've all been there. Let's build it together!</p>
+      <Header />
+      <Meals
+        menu={menu} />
     </>
   );
 }
