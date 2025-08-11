@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from '../store/cartStore'; // named import
+import { CartContext } from '../store/cartStore';
 import logo from "../../public/logo.jpg";
 import Button from "./common/Button";
 
