@@ -4,7 +4,11 @@ import logo from "../../public/logo.jpg";
 import Button from "./common/Button";
 
 export default function Header() {
-    const { cartItem } = useContext(CartContext);
+    const { cart } = useContext(CartContext);
+
+    const cartLength = cart.reduce((total, item) => {
+        return total + item.quantity;
+    }, 0)
 
     return (
         <header id="main-header">
@@ -13,7 +17,7 @@ export default function Header() {
                 <h1>Logo</h1>
             </div>
             <div className="right-header">
-                <Button textOnly>cart({cartItem.length})</Button>
+                <Button textOnly>cart({cart.length})</Button>
             </div>
         </header>
     );
