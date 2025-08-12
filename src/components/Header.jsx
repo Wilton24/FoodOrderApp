@@ -2,13 +2,29 @@ import { useContext } from "react";
 import { CartContext } from '../store/cartStore';
 import logo from "../../public/logo.jpg";
 import Button from "./common/Button";
+import { UserProgressContext } from "../store/UserProgressContext";
+
 
 export default function Header() {
-    const { cart } = useContext(CartContext);
+    const cartCtx = useContext(CartContext);
+    const userProgressCtx = useContext(UserProgressContext);
 
-    const cartLength = cart.reduce((total, item) => {
+    const cartLength = cartCtx.cartItem.reduce((total, item) => {
         return total + item.quantity;
-    }, 0)
+    }, 0);
+
+    function handleShowCart() {
+        userProgressCtx.showCart();
+    };
+    function handleHideCart() {
+        userProgressCtx.hideCart();
+    };
+    function handleShowCheckout() {
+        userProgressCtx.showCheckout();
+    };
+    function handleHideCheckout() {
+        userProgressCtx.hideCheckout();
+    };
 
     return (
         <header id="main-header">
@@ -17,7 +33,10 @@ export default function Header() {
                 <h1>Logo</h1>
             </div>
             <div className="right-header">
-                <Button textOnly>cart({cart.length})</Button>
+                <Button
+                    onClick={handleShowCart}
+                    textOnly>CART({cartCtx.cart.length})
+                </Button>
             </div>
         </header>
     );

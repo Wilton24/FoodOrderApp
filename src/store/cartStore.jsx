@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useReducer } from "react";
 import { getAllMenu } from "../services/api"
 
 export const CartContext = createContext({
+    cart: [],
     cartItem: [],
     menu: [],
     addItem: () => { },
