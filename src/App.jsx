@@ -3,6 +3,7 @@ import CartContextProvider from "./store/cartStore"
 import Menu from "./components/Menu";
 import UserProgressContext from "./store/UserProgressContext";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
           <Header />
           <Menu />
           <Cart />
+          <Checkout />
         </CartContextProvider>
       </UserProgressContext>
     </>

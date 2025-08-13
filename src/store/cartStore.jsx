@@ -1,12 +1,14 @@
 import { createContext, useState, useEffect, useReducer } from "react";
-import { getAllMenu } from "../services/api"
+import { getAllMenu } from "../services/api";
+import { currencyFormatter } from "../utils/formatter";
 
 export const CartContext = createContext({
     cart: [],
     cartItem: [],
     menu: [],
     addItem: () => { },
-    removeItem: () => { }
+    removeItem: () => { },
+    cartTotal: 0
 });
 
 const ACTION_TYPE = {
@@ -70,6 +72,7 @@ export default function CartContextProvider({ children }) {
     function removeItem(id) {
         dispatchCartAction({ type: ACTION_TYPE.REMOVE_ITEM, id });
     }
+    const cartTotal = currencyFormatter.format(cart.items.reduce((total, item) => total + item.price * item.quantity, 0));
 
 
 
@@ -78,7 +81,8 @@ export default function CartContextProvider({ children }) {
         addItem,
         removeItem,
         cartItem,
-        menu
+        menu,
+        cartTotal
     };
 
     return (

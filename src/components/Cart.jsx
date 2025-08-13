@@ -1,6 +1,5 @@
 import Modal from "./common/Modal";
 import { useContext } from "react";
-import { currencyFormatter } from "../utils/formatter";
 import Button from "./common/Button";
 import { CartContext } from '../store/cartStore';
 import { UserProgressContext } from "../store/UserProgressContext";
@@ -14,13 +13,13 @@ export default function Cart() {
         userProgressCtx.hideCart();
     }
 
-    const cartTotal = currencyFormatter.format(cartCtx.cart.reduce((total, item) => total + item.price * item.quantity, 0));
     const cartLength = cartCtx.cart.length;
 
-    console.log(`cart length: ${cartLength}`);
-
     return (
-        <Modal open={userProgressCtx.progress === 'cart'} className="cart">
+        <Modal
+            className="cart"
+            open={userProgressCtx.progress === 'cart'}
+            onClose={userProgressCtx.progress === 'cart' ? handleCloseCart : null}>
             <h2>Your Cart</h2>
             <ul>
                 {cartCtx.cart.map(item => (
@@ -34,10 +33,10 @@ export default function Cart() {
                     />
                 ))}
             </ul>
-            <p className="cart-total">Total: {cartTotal}</p>
+            <p className="cart-total">Total: {cartCtx.cartTotal}</p>
             <p className="modal-actions">
                 <Button onClick={handleCloseCart}>Close</Button>
-                {cartLength > 0 && <Button onClick={handleCloseCart}>Go to Checkout</Button>}
+                {cartLength > 0 && <Button onClick={userProgressCtx.showCheckout}>Go to Checkout</Button>}
             </p>
         </Modal>
     )
