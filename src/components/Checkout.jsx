@@ -9,9 +9,15 @@ export default function Checkout() {
     const cartCtx = useContext(CartContext);
     const userProgressCtx = useContext(UserProgressContext);
 
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        e.target.reset();
+    }
+
     return (
         <Modal open={userProgressCtx.progress === 'checkout'} className="checkout" onClose={userProgressCtx.hideCheckout}>
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
                 <h2 className="checkout">Checkout</h2>
                 <p>Total amount: {cartCtx.cartTotal}</p>
                 <Input label="Full name" type="text" id="full-name" />
