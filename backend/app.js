@@ -23,6 +23,18 @@ app.get('/meals', async (req, res) => {
   res.json(JSON.parse(meals));
 });
 
+
+app.post('/testing', async (req, res) => {
+  const testData = req.body;
+
+  if (!testData || !testData.name || !testData.value) {
+    return res.status(400).json({ message: 'Invalid test data.' });
+  }
+
+  console.log('Received test data:', testData);
+  res.status(201).json({ message: 'Test data received successfully.' });
+});
+
 app.post('/orders', async (req, res) => {
   const orderData = req.body.order;
 

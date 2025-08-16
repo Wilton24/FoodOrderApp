@@ -15,23 +15,18 @@ export default function Checkout() {
         e.preventDefault();
         const fd = new FormData(e.target)
         const formData = Object.fromEntries(fd.entries());
-        const fullName = formData["full-name"];
-        const email = formData["email"];
-        const address = formData["address"];
-        const postalCode = formData["postal-code"];
-        const city = formData["city"];
 
         const orderData = {
-            customer: { ...formData },
             items: cartCtx.cart.map(item => ({
                 id: item.id,
                 name: item.name,
                 quantity: item.quantity,
                 price: item.price
             })),
+            customer: { ...formData },
         };
         await createOrder(orderData);
-        console.log(orderData);
+        // console.log(orderData);
 
         userProgressCtx.hideCheckout();
     }
@@ -43,7 +38,7 @@ export default function Checkout() {
                 <p>Total amount: {cartCtx.cartTotal}</p>
                 <Input label="Full name" type="text" id="name" />
                 <Input label="Email" type="email" id="email" />
-                <Input label="Address" type="text" id="address" />
+                <Input label="Street" type="text" id="street" />
                 <div className="control-row">
                     <Input label="Postal Code" type="text" id="postal-code" />
                     <Input label="City" type="text" id="city" />

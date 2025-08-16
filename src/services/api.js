@@ -17,6 +17,7 @@ export async function createOrder(orderData) {
         const url = "http://localhost:3000/orders";
         const response = await axios.post(url, { order: orderData });
         console.log(response.data);
+        // console.log({ order: orderData });
 
         return response.data;
     } catch (err) {
