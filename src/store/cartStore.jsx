@@ -1,11 +1,9 @@
 import { createContext, useState, useEffect, useReducer } from "react";
-import { getAllMenu } from "../services/api";
 import { currencyFormatter } from "../utils/formatter";
 
 export const CartContext = createContext({
     cart: [],
     cartItem: [],
-    menu: [],
     addItem: () => { },
     removeItem: () => { },
     cartTotal: 0
@@ -54,16 +52,8 @@ function cartReducer(state, action) {
 
 export default function CartContextProvider({ children }) {
     const [cartItem, setCartItem] = useState([]);
-    const [menu, setMenu] = useState([]);
     const [cart, dispatchCartAction] = useReducer(cartReducer, { items: [] })
 
-    useEffect(() => {
-        async function fetchMenu() {
-            const allMeals = await getAllMenu();
-            setMenu(allMeals);
-        }
-        fetchMenu();
-    }, []);
 
     function addItem(item) {
         dispatchCartAction({ type: ACTION_TYPE.ADD_ITEM, item });
@@ -81,7 +71,6 @@ export default function CartContextProvider({ children }) {
         addItem,
         removeItem,
         cartItem,
-        menu,
         cartTotal
     };
 

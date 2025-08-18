@@ -26,9 +26,10 @@ export default function Checkout() {
             customer: { ...formData },
         };
         await createOrder(orderData);
-        // console.log(orderData);
 
         userProgressCtx.hideCheckout();
+        // cartCtx.dispatchCartAction({ type: 'REMOVE_ITEM', id: null }); // Clear cart after order submission
+        cartCtx.cart = [];
     }
 
     return (
@@ -46,7 +47,7 @@ export default function Checkout() {
                 <p className="modal-actions">
                     <Button textOnly type="button" onClick={userProgressCtx.hideCheckout}>Close</Button>
                     {/* <Button textOnly type="button" onClick={cartCtx.onClose}>Submit Order</Button> */}
-                    <Button textOnly type="submit" onClick={cartCtx.onClose}>Submit Order</Button>
+                    <Button type="submit" onClick={cartCtx.onClose}>Submit Order</Button>
                 </p>
             </form>
         </Modal>
