@@ -14,8 +14,8 @@ async function sendHttpRequest(url, config) {
     }
 };
 
-export default function useHttp(url, config) {
-    const [data, setData] = useState(null);
+export default function useHttp(url, config, initialData = null) {
+    const [data, setData] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -32,11 +32,10 @@ export default function useHttp(url, config) {
     }, [url, config]);
 
     useEffect(() => {
-        if (config && config.method === 'GET') {
+        if (config && config.method === 'GET' || !config) {
             sendRequest();
-
         };
-    }, [], config);
+    }, []);
 
     return { data, isLoading, error, sendRequest };
 };

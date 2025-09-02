@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useState, useReducer } from "react";
 import { currencyFormatter } from "../utils/formatter";
 
 export const CartContext = createContext({

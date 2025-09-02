@@ -5,11 +5,18 @@ import Input from "./common/Input";
 import Button from "./common/Button";
 import { UserProgressContext } from "../store/UserProgressContext";
 import { createOrder } from "../services/api";
+import useHttp from "../hooks/useHttp";
+
+const requestConfig = {
+    method: 'POST',
+    body: JSON.stringify(orderData)
+};
 
 export default function Checkout() {
     const cartCtx = useContext(CartContext);
     const userProgressCtx = useContext(UserProgressContext);
 
+    const { data, isLoading, error, sendRequest } = useHttp('http://localhost:3000/orders', requestConfig, {});
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -25,7 +32,6 @@ export default function Checkout() {
             })),
             customer: { ...formData },
         };
-        await createOrder(orderData);
 
         userProgressCtx.hideCheckout();
         // cartCtx.dispatchCartAction({ type: 'REMOVE_ITEM', id: null }); // Clear cart after order submission

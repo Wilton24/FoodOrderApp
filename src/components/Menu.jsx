@@ -6,7 +6,7 @@ import useHttp from "../hooks/useHttp";
 
 
 export default function Menu() {
-    const { data, isLoading, error } = useHttp('http://localhost:3000/meals', { method: 'GET' });
+    const { data, isLoading, error } = useHttp('http://localhost:3000/meals', { method: 'GET' }, []);
 
     return (
         <ul id="meals">
